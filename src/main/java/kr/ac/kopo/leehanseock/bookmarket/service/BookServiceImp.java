@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -33,8 +34,8 @@ public class BookServiceImp implements BookService{
     }
 
     @Override
-    public List<Book> getBookListByFilter() {
-        Set<Book> booksByFilter = bookRepository.getBookListByFilter();
+    public Set<Book> getBookListByFilter(Map<String, List<String>> filter) {
+        Set<Book> booksByFilter = bookRepository.getBookListByFilter(filter);
         return booksByFilter;
     }
 
