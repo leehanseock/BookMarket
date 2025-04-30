@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class BookServiceImp implements BookService{
@@ -29,6 +30,12 @@ public class BookServiceImp implements BookService{
     public List<Book> getBookListByCategory(String category) {
         List<Book> booksByCategory = bookRepository.getBookListByCategory(category);
         return booksByCategory;
+    }
+
+    @Override
+    public List<Book> getBookListByFilter() {
+        Set<Book> booksByFilter = bookRepository.getBookListByFilter();
+        return booksByFilter;
     }
 
 }

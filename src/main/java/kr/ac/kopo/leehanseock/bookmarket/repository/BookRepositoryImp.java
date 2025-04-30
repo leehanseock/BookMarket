@@ -4,8 +4,7 @@ import kr.ac.kopo.leehanseock.bookmarket.domain.Book;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class BookRepositoryImp implements BookRepository/*인터페이스 상속*/ {
@@ -87,6 +86,36 @@ public class BookRepositoryImp implements BookRepository/*인터페이스 상속
                 booksByCategory.add(book);
             }
         }
+        return booksByCategory;
+    }
+
+    @Override
+    public Set<Book> getBookListByFilter(Map<String, List<String>> filter) {
+        Set<Book> booksByPublisher = new HashSet<Book>();
+        Set<Book> booksByCategory = new HashSet<Book>();
+        Set<String> booksByFilter = filter.keySet();
+
+        if(booksByFilter.contains("publisher")){
+            for (int i = 0;i<filter.get("publisher").size();i++){
+                String publisherName = filter.get("publisher").get(i);
+                for (Book book : listOfBooks) {
+                    if (publisherName.equalsIgnoreCase(book.getPublisher())) {
+                        booksByPublisher.add(book);
+                    }
+                }
+            }
+        }
+
+        if(booksByFilter.contains("category")){
+            for (int i = 0;i<filter.get("category").size();i++){
+                String categoryName = filter.get("category").get(i);
+                List<Book> list = getBookListByCategory(categoryName);
+                booksByCategory.addAll(list);
+            }
+        }
+
+        //저장된 Book 객체들 중에서 두 Set를 비교하여 같은 값만 남기고 나머지는 제거하는 역할
+        booksByCategory.retainAll(booksByPublisher); // 교집한만 남기고 나머지는 제거하는 메소드
         return booksByCategory;
     }
 }
