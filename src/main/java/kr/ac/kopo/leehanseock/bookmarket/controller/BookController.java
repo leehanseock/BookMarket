@@ -62,9 +62,9 @@ public class BookController {
     }
 
     @PostMapping("/add")
-    public String requestSubmitNewBook(@ModelAttribute("book") Book book) {
+    public String requestSubmitNewBook(@ModelAttribute Book book) {
         bookService.setNewBook(book);
-        return "redirect:/Books";
+        return "redirect:/books";
     }
 
     @ModelAttribute
