@@ -39,4 +39,9 @@ public class BookServiceImp implements BookService{
         return booksByFilter;
     }
 
+    @Override
+    public void setNewBook(Book book) {
+        bookRepository.setNewBook(book);
+    }
+
 }

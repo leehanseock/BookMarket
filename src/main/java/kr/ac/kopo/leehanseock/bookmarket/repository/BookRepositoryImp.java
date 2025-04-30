@@ -118,4 +118,9 @@ public class BookRepositoryImp implements BookRepository/*인터페이스 상속
         booksByCategory.retainAll(booksByPublisher); // 교집한만 남기고 나머지는 제거하는 메소드
         return booksByCategory;
     }
+
+    @Override
+    public void setNewBook(Book book) {
+        listOfBooks.add(book);
+    }
 }
