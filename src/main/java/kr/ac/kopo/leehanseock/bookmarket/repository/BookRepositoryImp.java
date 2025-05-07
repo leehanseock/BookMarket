@@ -25,6 +25,7 @@ public class BookRepositoryImp implements BookRepository/*인터페이스 상속
         book1.setUnitsInStock(21);
         book1.setReleaseDate("2024/12/31");
         book1.setCondition("신규도서");
+        book1.setFileName("ISBN1140711962.jpg");
 
         Book book2 = new Book();
         book2.setBookId("ISBN1130661768");
@@ -39,6 +40,7 @@ public class BookRepositoryImp implements BookRepository/*인터페이스 상속
         book2.setUnitsInStock(22);
         book2.setReleaseDate("2025/03/03");
         book2.setCondition("중고도서");
+        book2.setFileName("ISBN1130661768.jpg");
 
         Book book3 = new Book();
         book3.setBookId("ISBN9791162243077");
@@ -52,6 +54,7 @@ public class BookRepositoryImp implements BookRepository/*인터페이스 상속
         book3.setUnitsInStock(10);
         book3.setReleaseDate("2023/08/15");
         book3.setCondition("신규도서");
+        book3.setFileName("ISBN9791162243077.jpg");
 
         listOfBooks.add(book1);
         listOfBooks.add(book2);
