@@ -96,7 +96,7 @@ public class BookController {
 
     @GetMapping("/download")
     public void downloadBookImage(@RequestParam("file") String paramKey, HttpServletResponse response) throws IOException {
-        File imageFile = new File(fileDir + paramKey);
+        File imageFile = new File(fileDir, paramKey);  // 자동으로 디렉토리 경로 + 파일명으로 합쳐줌
         response.setContentType("application/download");
         response.setHeader("Content-Disposition", "attachment; filename=\"" + imageFile.getName() + "\"");
         response.setContentLength((int) imageFile.length());
