@@ -15,16 +15,16 @@ import java.math.BigDecimal;
 //@NoArgsConstructor //생성자 추가
 @Data
 public class Book {
-    @Pattern(regexp = "ISBN[0-9]+") //정규표현식
+    @Pattern(regexp = "ISBN[0-9]+", message="{Pattern.book.bookId}") //정규표현식
     @BookId //도서ID
     private String bookId; //도서ID
 
-    @Size(min = 4, max = 50)
+    @Size(min = 4, max = 50, message="{Size.book.name}")
     private String name; //도서명
 
-    @Min(0)
-    @Digits(integer = 8, fraction = 2)
-    @NotNull
+    @Min(value=0, message="{Min.book.UnitPrice}")
+    @Digits(integer = 8, fraction = 2, message="{Digits.book.UnitPrice}")
+    @NotNull(message="{NotNull.book.UnitPrice}")
     private BigDecimal unitPrice; //단가
 
     private String author; //저자명
