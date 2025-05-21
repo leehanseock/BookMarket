@@ -80,19 +80,58 @@ public class BookController {
         if (bindingResult.hasErrors()) {
             return "addBook";
         }
-        MultipartFile bookImage = book.getBookImage();
-        String saveName = bookImage.getOriginalFilename();
-        File saveFile = new File(fileDir, saveName);
-        if (bookImage != null && !bookImage.isEmpty()) {
-            try {
-                bookImage.transferTo(saveFile);
-            } catch (Exception e) {
-                throw new RuntimeException("도서 이미지 업로드가 실패했습니다.", e);
+
+        try {
+            System.out.println("===== 파일 업로드 디버깅 =====");
+            System.out.println("파일 디렉토리 경로: " + fileDir);
+
+            // 디렉토리 존재 여부 확인
+            File directory = new File(fileDir);
+            System.out.println("디렉토리 절대 경로: " + directory.getAbsolutePath());
+            System.out.println("디렉토리 존재 여부: " + directory.exists());
+            System.out.println("디렉토리 쓰기 권한: " + directory.canWrite());
+
+            // 디렉토리 생성 시도
+            if (!directory.exists()) {
+                boolean created = directory.mkdirs();
+                System.out.println("디렉토리 생성 결과: " + created);
             }
+
+            // 파일 정보 확인
+            MultipartFile bookImage = book.getBookImage();
+            if (bookImage == null) {
+                System.out.println("업로드된 파일이 없습니다.");
+                book.setFileName("no_image.jpg");
+                bookService.setNewBook(book);
+                return "redirect:/books";
+            }
+
+            System.out.println("파일 이름: " + bookImage.getOriginalFilename());
+            System.out.println("파일 크기: " + bookImage.getSize() + " bytes");
+            System.out.println("파일 타입: " + bookImage.getContentType());
+
+            // 고유한 파일명 생성
+            String originalFilename = bookImage.getOriginalFilename();
+            String uniqueFileName = System.currentTimeMillis() + "_" + originalFilename;
+            File saveFile = new File(directory, uniqueFileName);
+
+            System.out.println("저장할 파일 경로: " + saveFile.getAbsolutePath());
+            System.out.println("파일 저장 시도...");
+
+            // 파일 저장
+            bookImage.transferTo(saveFile);
+            System.out.println("파일 저장 성공!");
+
+            book.setFileName(uniqueFileName);
+            bookService.setNewBook(book);
+            return "redirect:/books";
+
+        } catch (Exception e) {
+            System.out.println("===== 오류 발생 =====");
+            System.out.println("오류 메시지: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("도서 이미지 업로드가 실패했습니다: " + e.getMessage(), e);
         }
-        book.setFileName(saveName);
-        bookService.setNewBook(book);
-        return "redirect:/books";
     }
 
     @ModelAttribute
