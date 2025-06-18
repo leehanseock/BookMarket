@@ -72,7 +72,11 @@
 
         <div class ="row align-items-md-stretch">
            <div class ="col-md-12">
-               <a href="#" class="btn btn-success text-right" style = "float:right">주문하기</a>
+               <form name="deleteForm" method="post">
+                     <input type="hidden" name="_method" value="delete"/>
+                   <a th:href="'javascript:deleteCart()'" class="btn btn-danger" style="float:left">삭제하기</a>
+                   <a href="#" class="btn btn-success text-right" style = "float:right">주문하기</a>
+               </form>
            </div>
             <div style="padding-top: 50px">
                 <table class="table table-hover">
@@ -93,7 +97,7 @@
                             <td th:text="${cartItem.value.book.unitPrice}"></td>
                             <td th:text="${cartItem.value.quantity}"></td>
                             <td th:text="${cartItem.value.totalPrice}"></td>
-                            <td><a th:href="'javascript:removeFromCart(\''+${cartItem.value.book.bookId}+'\')',\''+${cartId}+'\'"><span class="badge text-bg-danger">삭제</span></a></td>
+                            <td><a th:href="'javascript:removeFromCart(\''+ ${cartItem.value.book.getBookId()}+'\',\''+ ${cartId}+'\')'"><span class="badge text-bg-danger">삭제</span></a></td>
                         </tr>
                         </div>
                     </div>

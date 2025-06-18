@@ -10,3 +10,10 @@ function removeFromCart(bookId, cartId){
     document.removeForm.submit();
     setTimeout('location.reload();',10);
 }
+
+function deleteCart(cartId){
+    if(confirm("장바구니를 비우시겠습니까?")) {
+        document.deleteForm.submit();
+        setTimeout('location.reload();', 10);
+    }
+}
