@@ -35,4 +35,9 @@ public class CartRepositoryImp implements CartRepository {
         }
         listOfCarts.put(cartId, cart);
     }
+
+    @Override
+    public void delete(String cartId) {
+
+    }
 }

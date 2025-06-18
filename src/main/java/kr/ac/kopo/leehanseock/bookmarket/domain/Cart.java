@@ -45,4 +45,13 @@ public class Cart {
         }
     }
 
+    public void removeCartItem(CartItem item) {
+        String bookId = item.getBook().getBookId();
+        if(cartItems.containsKey(bookId)){
+            cartItems.remove(bookId);
+            updateGrandTotal();
+        }
+
+    }
+
 }
