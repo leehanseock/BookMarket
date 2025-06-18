@@ -28,6 +28,7 @@ public class CartItem {
         this.updateTotalPrice();
     }
 
+    //소계
     public void updateTotalPrice() {
         this.totalPrice = book.getUnitPrice().multiply(new BigDecimal(quantity));
     }
