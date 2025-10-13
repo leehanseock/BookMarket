@@ -1,6 +1,7 @@
 package kr.ac.kopo.leehanseock.bookmarket.service;
 
 import kr.ac.kopo.leehanseock.bookmarket.domain.Cart;
+import kr.ac.kopo.leehanseock.bookmarket.exception.CartException;
 import kr.ac.kopo.leehanseock.bookmarket.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,14 @@ return cartRepository.read(cartId);
     @Override
     public void delete(String cartId) {
         cartRepository.delete(cartId);
+    }
+
+    @Override
+    public Cart validateCart(String cartId) {
+        Cart cart = cartRepository.read(cartId);
+        if (cart == null || cart.getCartItems().size() == 0) {
+            throw new CartException(cartId);
+        }
+        return cart;
     }
 }
