@@ -71,7 +71,7 @@
 
         <div class ="row align-items-md-stretch">
             <form th:object = "${order}" action = "/BookMarket/order/orderConfirmation" method = "post" class="form-horizontal">
-                <div class="containter col-md-10 py-5" style="background: #e9ecef">
+                <div class="container col-md-10 py-5" style="background: #e9ecef">
                     <div class="text-center">
                         <h1>영수증</h1>
                     </div>
@@ -80,7 +80,7 @@
                             <b>배송 주소</b><br>
                             성명: [[${order.shipping.name}]]<br>
                             우편번호: [[${order.shipping.address.zipcode}]]<br>
-                            주소: [[#{order.shipping.address.addressName}]] [[#{order.shipping.address.detailName}]] ([[#{order.shipping.address.country}]])<br>
+                            주소: [[${order.shipping.address.addressName}]] [[${order.shipping.address.detailName}]] ([[${order.shipping.address.country}]])<br>
                         </div>
                         <div class="col-md-6 text-right py-3">
                            <p><em>배송일: [[${order.shipping.date}]]</em></p>
@@ -92,7 +92,7 @@
                                 <b>청구 주소</b><br>
                                 성명: [[${order.customer.name}]]<br>
                                 우편번호: [[${order.customer.address.zipcode}]]<br>
-                                주소: [[#{order.customer.addressName}]] [[#{order.customer.address.detailName}]] ([[#{order.customer.address.country}]])<br>
+                                주소: [[${order.customer.address.addressName}]] [[${order.customer.address.detailName}]] ([[${order.customer.address.country}]])<br>
                                 Mobile: [[${order.customer.phone}]]<br>
                             </address>
                         </div>
@@ -124,12 +124,12 @@
                                 <td></td>
                                 <td></td>
                                 <td class="text-right"><h5><b>총액: </b></h5></td>
-                                <td class="text-center text-danger"><h4><b>[[${order.grandTotal]]</b></h4></td>
+                                <td class="text-center text-danger"><h4><b>[[${order.grandTotal}]]</b></h4></td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="container col-mid-5 py-3">
+                    <div class="container col-md-5 py-3">
                         <a href="/BookMarket/order/orderCustomerInfo" class="btn btn-secondary" role="button">이전</a>
                         <button type="submit" class="btn btn-success">주문완료</button>
                         <a href="/BookMarket/order/orderCancelled" class="btn btn-secondary" role="button">취소</a>
