@@ -112,7 +112,7 @@
                                     <td class="text-center">
                                         <span th:each="book:${bookList}" th:if="${#strings.equals(book.bookId,cartItem.value.bookId)}">[[${book.unitPrice}]]원</span>
                                     </td>
-                                    <td class="text-center">[[${cartItem.value.totalPrice}]]원</td>
+                                    <td class="text-center">[[${cartItem.value.price}]]원</td>
                                 </tr>
                             </div>
                             <tr>
