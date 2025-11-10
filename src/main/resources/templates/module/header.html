@@ -1,0 +1,33 @@
+<header class="pb-3 mb-4 border-bottom" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <div class = "container d-flex flex-wrap justify-content-center">
+        <a href="/BookMarket/home" class="d-flex align-items-center text-body-emphasis text-decoration-none mb-3 mb-lg-0 me-lg-auto">
+            <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                 width="32px" height="32px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+<g>
+	<path fill="#394240" d="M56,0H8C5.789,0,4,1.789,4,4v52c0,4.418,3.582,8,8,8h44c2.211,0,4-1.789,4-4V4C60,1.789,58.211,0,56,0z
+		 M52,56H16c-2.211,0-4-1.789-4-4s1.789-4,4-4h36V56z M52,40H12V8h40V40z"/>
+    <path fill="#F9EBB2" d="M52,56H16c-2.211,0-4-1.789-4-4s1.789-4,4-4h36V56z"/>
+    <rect x="12" y="8" fill="#45AAB8" width="40" height="32"/>
+</g>
+</svg>
+            <span class="fs-4">&nbsp;NO24</span>
+        </a>
+        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">도서목록</a>
+        <ul class="dropdown-menu">
+            <li><a class="drowdown-item" href="/BookMarket/books">전체도서</a></li>
+            <li><a class="drowdown-item" href="/BookMarket/books/IT모바일">IT모바일</a></li>
+            <li><a class="drowdown-item" href="/BookMarket/books/경제경영">경제경영</a></li>
+        </ul>
+        &nbsp;|&nbsp;
+        <a sec:authorize="hasRole('ROLE_ADMIN')" href="/BookMarket/books/add" class="nav-link">도서등록 &nbsp;|&nbsp;</a>
+        <a sec:authorize="isAuthenticated()" href="/BookMarket/books/cart" class="nav-link">장바구니 &nbsp;|&nbsp;</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" href="/BookMarket/order/list" class="nav-link">주문목록 &nbsp;|&nbsp;</a>
+        <a href="/BookMarket/board/add" class="nav-link">게시판 &nbsp;|&nbsp;</a>
+        <a sec:authorize="isAnonymous()" href="/BookMarket/members/add" class="nav-link">회원가입 &nbsp;|&nbsp;</a>
+        <a sec:authorize="isAnonymous()" href="/BookMarket/books/add" class="nav-link">로그인 &nbsp;|&nbsp;</a>
+        <a sec:authorize="isAuthenticated()" th:href="'/BookMarket/members/update/'+${session.userLoginInfo.memberId}" class="nav-link">회원수정 &nbsp;|&nbsp;</a>
+        <a sec:authorize="isAuthenticated()" href="/BookMarket/logout" class="nav-link">로그아웃 &nbsp;|&nbsp;</a>
+        <b sec:authorize="isAuthenticated()"><span sec:authentication="name"></span>님</b>
+    </div>
+</header>
+<script src="/BookMarket/js/bootstrap.bundle.min.js" rel="stylesheet"></script>
